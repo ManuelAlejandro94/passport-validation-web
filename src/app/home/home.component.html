@@ -1,0 +1,58 @@
+<div class="container">
+    <h1>Passport Validator</h1>
+    <div class="parent">
+        <div>
+            <h4>Ingresa los datos de tu pasaporte</h4>
+            <div class="form-card">
+                <form [formGroup]="passportForm" (ngSubmit)="submit()" novalidate>
+                    <label for="type"><b>Type</b></label>
+                    <input
+                        formControlName="type"
+                        type="text"
+                        placeholder="Passport type"
+                        maxlength="1"
+                        class="form-control"
+                        required
+                    />
+                    <div *ngIf="passportForm.get('type')?.errors && passportForm.get('type')?.dirty">
+                        <p *ngIf="passportForm.get('type')?.hasError('required')">Field is required</p>
+                        <p *ngIf="passportForm.get('type')?.hasError('maxlength')">Field cant' be more than 1 letter</p>
+                    </div>
+
+                    <label for="country"><b>Country</b></label>
+                    <input
+                        formControlName="country"
+                        type="text"
+                        placeholder="Country"
+                        minlength="3"
+                        maxlength="3"
+                        class="form-control"
+                        required
+                    />
+                    <div *ngIf="passportForm.get('country')?.errors && passportForm.get('country')?.dirty">
+                        <p *ngIf="passportForm.get('country')?.hasError('required')">Field is required</p>
+                        <p *ngIf="passportForm.get('country')?.hasError('maxlength')">Field cant' be more than 3 letters</p>
+                        <p *ngIf="passportForm.get('country')?.hasError('minlength')">Field need to be 3 letters</p>
+                    </div>
+
+                    <label for="passportNumber"><b>Passport Number</b></label>
+                    <input
+                        formControlName="passportNumber"
+                        type="text"
+                        placeholder="Type the passport number"
+                        maxlength="9"
+                        class="form-control"
+                        required
+                    />
+                    <div *ngIf="passportForm.get('passportNumber')?.errors && passportForm.get('passportNumber')?.dirty">
+                        <p *ngIf="passportForm.get('passportNumber')?.hasError('required')">Field is required</p>
+                        <p *ngIf="passportForm.get('passportNumber')?.hasError('maxlength')">Field cant' be more than 9 letters</p>
+                    </div>
+
+                    <hr>
+                    <button type="submit" [disabled]="passportForm.invalid">Validar</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
