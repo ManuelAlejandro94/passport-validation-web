@@ -1,10 +1,10 @@
 <div class="container">
     <h1>Passport Validator</h1>
     <div class="parent">
-        <div>
+        <div class="form-section">
             <h4>Ingresa los datos de tu pasaporte</h4>
             <div class="form-card">
-                <form [formGroup]="passportForm" (ngSubmit)="submit()" novalidate>
+                <form [formGroup]="passportForm" (ngSubmit)="submit()">
                     <label for="type"><b>Type</b></label>
                     <input
                         formControlName="type"
@@ -12,6 +12,7 @@
                         placeholder="Passport type"
                         maxlength="1"
                         class="form-control"
+                        onkeyup="this.value = this.value.toUpperCase()"
                         required
                     />
                     <div *ngIf="passportForm.get('type')?.errors && passportForm.get('type')?.dirty">
@@ -27,6 +28,7 @@
                         minlength="3"
                         maxlength="3"
                         class="form-control"
+                        onkeyup="this.value = this.value.toUpperCase()"
                         required
                     />
                     <div *ngIf="passportForm.get('country')?.errors && passportForm.get('country')?.dirty">
@@ -42,6 +44,7 @@
                         placeholder="Type the passport number"
                         maxlength="9"
                         class="form-control"
+                        onkeyup="this.value = this.value.toUpperCase()"
                         required
                     />
                     <div *ngIf="passportForm.get('passportNumber')?.errors && passportForm.get('passportNumber')?.dirty">
@@ -49,10 +52,110 @@
                         <p *ngIf="passportForm.get('passportNumber')?.hasError('maxlength')">Field cant' be more than 9 letters</p>
                     </div>
 
+                    <label for="firstName"><b>First Name</b></label>
+                    <input
+                        formControlName="firstName"
+                        type="text"
+                        placeholder="Type the first name"
+                        class="form-control"
+                        onkeyup="this.value = this.value.toUpperCase()"
+                        required
+                    />
+                    <div *ngIf="passportForm.get('firstName')?.errors && passportForm.get('firstName')?.dirty">
+                        <p *ngIf="passportForm.get('firstName')?.hasError('required')">Field is required</p>
+                    </div>
+
+                    <label for="lastName"><b>Last Name</b></label>
+                    <input
+                        formControlName="lastName"
+                        type="text"
+                        placeholder="Type the last name"
+                        class="form-control"
+                        onkeyup="this.value = this.value.toUpperCase()"
+                        required
+                    />
+                    <div *ngIf="passportForm.get('lastName')?.errors && passportForm.get('lastName')?.dirty">
+                        <p *ngIf="passportForm.get('lastName')?.hasError('required')">Field is required</p>
+                    </div>
+
+                    <label for="dateOfBirth"><b>Date of Birth</b></label>
+                    <input
+                        formControlName="dateOfBirth"
+                        type="text"
+                        placeholder="dd/MM/yyyy"
+                        class="form-control"
+                        required
+                    />
+                    <div *ngIf="passportForm.get('dateOfBirth')?.errors && passportForm.get('dateOfBirth')?.dirty">
+                        <p *ngIf="passportForm.get('dateOfBirth')?.hasError('required')">Field is required</p>
+                        <p *ngIf="passportForm.get('dateOfBirth')?.hasError('pattern')">Field is not in the format dd/MM/yyyy</p>
+                    </div>
+
+                    <label for="sex"><b>Sex</b></label>
+                    <select
+                        formControlName="sex"
+                        class="form-control"
+                        required>
+                        <option [ngValue]="null" selected disabled>Select the sex</option>
+                        <option *ngFor="let item of options" [ngValue]="item.value">{{item.option}}</option>
+                    </select>
+                    <div *ngIf="passportForm.get('sex')?.errors && passportForm.get('sex')?.dirty">
+                        <p *ngIf="passportForm.get('sex')?.hasError('required')">Field is required</p>
+                    </div>
+
+                    <label for="dateIssue"><b>Date of Issue</b></label>
+                    <input
+                        formControlName="dateIssue"
+                        type="text"
+                        placeholder="dd/MM/yyyy"
+                        class="form-control"
+                        required
+                    />
+                    <div *ngIf="passportForm.get('dateIssue')?.errors && passportForm.get('dateIssue')?.dirty">
+                        <p *ngIf="passportForm.get('dateIssue')?.hasError('required')">Field is required</p>
+                        <p *ngIf="passportForm.get('dateIssue')?.hasError('pattern')">Field is not in the format dd/MM/yyyy</p>
+                    </div>
+
+                    <label for="dateExpiry"><b>Date of Expiry</b></label>
+                    <input
+                        formControlName="dateExpiry"
+                        type="text"
+                        placeholder="dd/MM/yyyy"
+                        class="form-control"
+                        required
+                    />
+                    <div *ngIf="passportForm.get('dateExpiry')?.errors && passportForm.get('dateExpiry')?.dirty">
+                        <p *ngIf="passportForm.get('dateExpiry')?.hasError('required')">Field is required</p>
+                        <p *ngIf="passportForm.get('dateExpiry')?.hasError('pattern')">Field is not in the format dd/MM/yyyy</p>
+                    </div>
+
+                    <label for="optionalData"><b>Optional data</b></label>
+                    <input
+                        formControlName="optionalData"
+                        type="text"
+                        placeholder="Type the optional data if is necessary"
+                        maxlength="14"
+                        class="form-control"
+                    />
+                    <div *ngIf="passportForm.get('optionalData')?.errors && passportForm.get('optionalData')?.dirty">
+                        <p *ngIf="passportForm.get('optionalData')?.hasError('maxlength')">Field cant' be more than 14 characters</p>
+                    </div>
+
                     <hr>
-                    <button type="submit" [disabled]="passportForm.invalid">Validar</button>
+                    <div class="button-center">
+                        <button type="submit" [disabled]="!passportForm.valid">Validate</button>
+                    </div>
                 </form>
             </div>
+        </div>
+    </div>
+    <h5>Mechanical Line</h5>
+    <div class="form-section">
+        <div class="form-card">
+            <h5>Upper line</h5>
+            <p>First line harcoded</p>
+            <h5>Bottom line</h5>
+            <p>Second line harcoded</p>
         </div>
     </div>
 </div>
