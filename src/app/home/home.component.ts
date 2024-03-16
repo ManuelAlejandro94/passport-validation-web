@@ -51,7 +51,6 @@ export class HomeComponent implements OnInit {
 
   submit(){
     this.passportModel = this.passportForm.value;
-    this.passportModel.country="";
     console.log(this.passportModel)
 
     this._zmlService.apiRequest(this.passportModel)
