@@ -25,10 +25,11 @@ export class HomeComponent implements OnInit {
       value: "F",
       option: "FEMALE"
     }
-  ]
+  ];
   private passportModel: IPassport = {};
-  firstLine:string = ""
-  secondLine:string = ""
+  firstLine:string = "";
+  secondLine:string = "";
+  isLoading: boolean = false;
 
   constructor(private _formBuilder: FormBuilder,
               private _zmlService: ZmlserviceService)  {
@@ -50,8 +51,8 @@ export class HomeComponent implements OnInit {
   }
 
   submit(){
+    this.isLoading = true;
     this.passportModel = this.passportForm.value;
-    console.log(this.passportModel)
 
     this._zmlService.apiRequest(this.passportModel)
       .subscribe( (resp: IZml) => {
@@ -61,6 +62,7 @@ export class HomeComponent implements OnInit {
       (error: IApiExceptions) => {
         console.error(error);
       });
+    this.isLoading = false;
   }
 
 }

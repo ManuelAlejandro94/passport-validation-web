@@ -5,8 +5,8 @@ html, body {
 body { 
     margin: 0;
     font-family: Roboto, "Helvetica Neue", sans-serif; 
-    background-color: black;
-    color: aliceblue;
+    background-color: #C4FFBE;
+    color: black;
 }
 
 p, h1, h2{

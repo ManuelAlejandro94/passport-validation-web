@@ -153,9 +153,15 @@
     <div class="form-section">
         <div class="form-card">
             <h5>Upper line</h5>
-            <p>{{ firstLine }}</p>
+            <div *ngIf="isLoading" class="loader">
+                <div class="dot-flashing"></div>
+            </div>
+            <p class="response">{{ firstLine }}</p>
             <h5>Bottom line</h5>
-            <p>{{ secondLine }}</p>
+            <div *ngIf="isLoading" class="loader">
+                <div class="dot-flashing"></div>
+            </div>
+            <p class="response">{{ secondLine }}</p>
         </div>
     </div>
 </div>
